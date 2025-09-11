@@ -1,0 +1,204 @@
+{
+  "kpis": [
+    {
+      "label": "Operating budget",
+      "value": "$283M"
+    },
+    {
+      "label": "Capital budget",
+      "value": "$47.8M"
+    },
+    {
+      "label": "Total revenue",
+      "value": "$305M"
+    }
+  ],
+  "items": [
+    {
+      "label": "Provincial Education Tax & Rocky View Foundation Seniors Funding",
+      "value": 33,
+      "breakdown": [
+        {
+          "label": "Alberta Education",
+          "amount": 77830400
+        },
+        {
+          "label": "Rocky View Seniors Foundation",
+          "amount": 1650900
+        }
+      ]
+    },
+    {
+      "label": "Capital Projects, Agricultural Services, Utilities & Operations",
+      "value": 23,
+      "breakdown": [
+        {
+          "label": "Fleet Services",
+          "amount": 7650700
+        },
+        {
+          "label": "Corporate Properties",
+          "amount": 4165400
+        },
+        {
+          "label": "Capital and Engineering Services",
+          "amount": 14370700
+        },
+        {
+          "label": "Wastewater",
+          "amount": 11467300
+        },
+        {
+          "label": "Water",
+          "amount": 8394300
+        },
+        {
+          "label": "Storm",
+          "amount": 274500
+        },
+        {
+          "label": "Cemetery",
+          "amount": 2241600
+        },
+        {
+          "label": "Solid Waste and Recycling",
+          "amount": 3590900
+        },
+        {
+          "label": "Watersheds and Airsheds",
+          "amount": 55000
+        },
+        {
+          "label": "Operational Services Admin",
+          "amount": 324600
+        },
+        {
+          "label": "Agricultural and Enviromental Services",
+          "amount": 1666600
+        }
+      ]
+    },
+    {
+      "label": "Corporate/Financial Services",
+      "value": 15,
+      "breakdown": [
+        {
+          "label": "Information Technology",
+          "amount": 7215300
+        },
+        {
+          "label": "Financial Services",
+          "amount": 2807500
+        },
+        {
+          "label": "Legislative Services",
+          "amount": 1125500
+        },
+        {
+          "label": "People and Culture",
+          "amount": 2733000
+        },
+        {
+          "label": "Legal Services",
+          "amount": 2900600
+        },
+        {
+          "label": "Customer Care and Supoort",
+          "amount": 1304300
+        },
+        {
+          "label": "General Financial Services",
+          "amount": 14690700
+        },
+        {
+          "label": "Assessment Services",
+          "amount": 1610600
+        },
+        {
+          "label": "Communications and Engagement",
+          "amount": 1406700
+        }
+      ]
+    },
+    {
+      "label": "Roads Maintenance",
+      "value": 10,
+      "breakdown": [
+        {
+          "label": "Transportation Services",
+          "amount": 24108600
+        }
+      ]
+    },
+    {
+      "label": "Fire Services & Emergency Response",
+      "value": 7,
+      "breakdown": [
+        {
+          "label": "Fire Services",
+          "amount": 17796600
+        },
+        {
+          "label": "Emergency Services",
+          "amount": 225800
+        }
+      ]
+    },
+    {
+      "label": "Planning & Development",
+      "value": 4,
+      "breakdown": [
+        {
+          "label": "Economic Development",
+          "amount": 648300
+        },
+        {
+          "label": "Building Services",
+          "amount": 4031000
+        },
+        {
+          "label": "Planing and Development",
+          "amount": 3062200
+        },
+        {
+          "label": "Planing and Development",
+          "amount": 1369100
+        }
+      ]
+    },
+    {
+      "label": "Enforcement",
+      "value": 3,
+      "breakdown": [
+        {
+          "label": "Enforcement Services",
+          "amount": 8405300
+        }
+      ]
+    },
+    {
+      "label": "Corporate & Council Administration",
+      "value": 3,
+      "breakdown": [
+        {
+          "label": "Council",
+          "amount": 1225700
+        },
+        {
+          "label": "Chief Administrative Officer",
+          "amount": 5083900
+        }
+      ]
+    },
+    {
+      "label": "Community Support & Recreation",
+      "value": 2,
+      "breakdown": [
+        {
+          "label": "Recreation and Community Support",
+          "amount": 6174200
+        }
+      ]
+    }
+  ]
+}
