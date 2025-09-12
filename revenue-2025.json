@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Property taxes",
+    "value": 187,
+    "color": "#9b87d3"
+  },
+  {
+    "name": "Levies",
+    "value": 13,
+    "color": "#1f77b4"
+  },
+  {
+    "name": "Fees",
+    "value": 16,
+    "color": "#d62728"
+  },
+  {
+    "name": "Province",
+    "value": 2,
+    "color": "#ff7f0e"
+  },
+  {
+    "name": "Transfer from reserve",
+    "value": 4,
+    "color": "#c7c7c7"
+  },
+  {
+    "name": "Licenses & permits",
+    "value": 7,
+    "color": "#9467bd"
+  },
+  {
+    "name": "Investment income",
+    "value": 5,
+    "color": "#17becf"
+  },
+  {
+    "name": "Other",
+    "value": 47,
+    "color": "#f0c419"
+  }
+]

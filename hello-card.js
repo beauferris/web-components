@@ -115,7 +115,7 @@ class MunicipalBudget extends HTMLElement {
           --header:#1f2f43; --field:#5c874c; --bar:#0095cc; --text:black;
           --radius:0; --row-h:38px; --grid-lines:rgba(255,255,255,.2); --border:#dbdcdd;
           font-family: Inter, system-ui, sans-serif;
-          max-width: 920px; margin: 8px 0 16px; color: var(--text);
+           margin: 8px 0 16px; color: var(--text);
           overflow: hidden; padding: 20px; border: 1px solid #dbdcdd;
           padding-top: 0; margin-top: 0; background: #fff;
         }
@@ -135,8 +135,8 @@ class MunicipalBudget extends HTMLElement {
         .bar .fill { width:var(--w); height:80%; background:var(--bar); display:flex; align-items:center; padding-inline:6px; box-sizing:border-box; }
         .percent-text { margin-left:10px; white-space:nowrap; }
         .breakdown { margin-top:8px; }
-        .breakdown summary { cursor:pointer; gap:10px; padding:10px 0; list-style:none; }
-        .breakdown__list { list-style:none; margin:6px 0 0; padding:0; display:grid; gap:6px; }
+        .breakdown summary { cursor:pointer; gap:10px; padding:10px 0;  }
+        .breakdown__list { list-style:none; margin:15px 0 0; padding:0; display:grid; gap:6px; }
         .breakdown__list li { display:flex; justify-content:space-between; border-bottom:1px dashed var(--border); padding:4px 0; }
         .breakdown__list li:last-child { border-bottom:0; }
         @media (max-width:520px){ .kpi-grid strong{ font-size:2rem; } }
