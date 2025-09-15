@@ -87,9 +87,7 @@ class RevenuePie extends HTMLElement {
     const vbY = -(rLbl + marginY);
 
     const svg = `
-      <svg viewBox="${vbX} ${vbY} ${
-      vbW + 140
-    } ${vbH}" role="img" aria-labelledby="title">
+      <svg viewBox="${vbX} ${vbY} ${vbW} ${vbH}" role="img" aria-labelledby="title">
         <title id="title">${title}</title>
         <g transform="translate(0,0)">
           <g class="slices"></g>
@@ -98,7 +96,7 @@ class RevenuePie extends HTMLElement {
       </svg>
     `;
 
-    this.shadowRoot.innerHTML = `<style>${css}</style><div class="host">${svg}</div>`;
+    this.shadowRoot.innerHTML = `<style>${css}</style><link rel="stylesheet" href="/main.css" /><div class="host">${svg}</div>`;
 
     const ns = "http://www.w3.org/2000/svg";
     const svgEl = this.shadowRoot.querySelector("svg");
@@ -173,7 +171,7 @@ const palette = [
 
 const css = `
 :host { display:block; }
-.host { width:100%; max-width:900px; }
+.host { width:100%;}
 svg { width:100%; height:auto; display:block; }
 .pie-label { font: 16px/1.2 system-ui, -apple-system, "Segoe UI", Roboto, Inter, sans-serif; fill:#1a1a1a; }
 .err { color:#b00020; font: 14px/1.4 system-ui, sans-serif; }

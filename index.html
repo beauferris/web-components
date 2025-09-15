@@ -4,17 +4,28 @@
     <meta charset="UTF-8" />
     <title>title</title>
   </head>
-  <body>
+  <body style="max-width: 960px">
+    <h2>Budget Breakdown</h2>
+    <municipal-kpis
+      heading="2025 Budget KPIs"
+      data-src="budget-2025.json"
+    ></municipal-kpis>
+
     <municipal-budget
       year="2025"
       max="35"
       data-src="/budget-2025.json"
     ></municipal-budget>
-    <script type="module" src="/revenue-pie.js"></script>
-
-    <revenue-pie title="2025 Operating Revenues" data-src="/revenue-2025.json">
-      </script>
-    </revenue-pie>
+    <h2>Revenue Breakdown</h2>
+    <revenue-pie
+      title="2025 Operating Revenues"
+      data-src="/revenue-2025.json"
+    ></revenue-pie>
+    <h2>Tax Comparison Tool</h2>
+    <property-tax-calculator></property-tax-calculator>
   </body>
-  <script type="module" src="hello-card.js"></script>
+  <script type="module" src="/kpi.js"></script>
+  <script type="module" src="/revenue-pie.js"></script>
+  <script type="module" src="budget-breakdown.js"></script>
+  <script type="module" src="/property-tax-calculator.js"></script>
 </html>
