@@ -82,7 +82,7 @@ class RevenuePie extends HTMLElement {
 
     this.shadowRoot.innerHTML = `
       <style>${css}</style>
-      <link rel="stylesheet" href="/main.css" />
+     
       <div class="host">
         <div >
          
@@ -263,7 +263,7 @@ svg { width:100%; height:auto; display:block; }
   border-collapse: collapse;
   background: #fff;
   font-family:  Arial, Helvetica, sans-serif;
-  font-size: 16px;
+  font-size: 19px;
   line-height: 1.25;
 }
 .govuk-table__caption {
@@ -306,7 +306,37 @@ svg { width:100%; height:auto; display:block; }
   display:inline-block; width: 0.9em; height: 0.9em;
   border-radius: 2px; margin-right: .5em; vertical-align: -0.1em;
 }
+.toggle {
+  font-family: "GDS Transport", arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.1875;
+  box-sizing: border-box;
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  margin-top: 0;
+  margin-right: 0;
+  margin-left: 0;
+  margin-bottom: 22px;
+  padding: 8px 10px 7px;
+  border: 2px solid transparent;
+  border-radius: 0;
+  color: #ffffff;
+  background-color: #00703c;
+  box-shadow: 0 2px 0 var(--button-shadow);
+  text-align: center;
+  vertical-align: top;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
 
+.toggle:hover {
+  background-color: #005a30;
+  /* background-color: #005a30; */
+}
 
 `;
 

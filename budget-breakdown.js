@@ -7,8 +7,9 @@ class MunicipalBudget extends HTMLElement {
     super();
     this.attachShadow({ mode: "open" });
     this._data = null;
+    this._view = "chart"; // "chart" | "table"
 
-    // Event delegation for toggle buttons
+    // Event delegation for breakdown toggles
     this.shadowRoot.addEventListener("click", (e) => {
       const btn = e.target.closest("button.toggle-details");
       if (!btn) return;
@@ -72,11 +73,7 @@ class MunicipalBudget extends HTMLElement {
     const { items = [] } = data;
     const max = this.max;
 
-
-
-    this.shadowRoot.innerHTML = `
-      ${STYLES}
-      
+    const chartHTML = `
       <section class="tax-chart" aria-labelledby="tax-chart-title">
         <div class="tax-chart__plot" role="img" aria-label="Horizontal bar chart showing municipal tax allocation by category.">
           ${items.map((it, i) => {
@@ -92,14 +89,10 @@ class MunicipalBudget extends HTMLElement {
                     Array.isArray(it.breakdown) && it.breakdown.length
                       ? `
                         <button class="toggle-details" type="button" aria-expanded="false" aria-controls="${panelId}">
-                          
-        
                           <svg class="chev" aria-hidden="true" viewBox="0 0 24 24" width="12" height="14" focusable="false">
-                            <!-- Down by default: M6 9 l6 6 l6 -6 -->
                             <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                           </svg>
-                        </button>`
-                      : ""
+                        </button>` : ""
                   }
                 </div>
                 ${
@@ -110,21 +103,107 @@ class MunicipalBudget extends HTMLElement {
                             `<li><span>${b.label}</span><span>${this.formatMoney(b.amount)}</span></li>`
                           ).join("")}
                         </ul>
-                      </div>`
-                    : ""
+                      </div>` : ""
                 }
               </div>`;
           }).join("")}
         </div>
       </section>
     `;
+
+    const tableHTML = this._renderTable(items);
+
+    this.shadowRoot.innerHTML = `
+      ${STYLES}
+      <div class="host">
+        <div>
+          <button class="toggle" type="button"
+                  aria-pressed="${this._view === "table"}"
+                  aria-controls="mb-chart mb-table">
+            ${this._view === "table" ? "Show chart" : "Show table"}
+          </button>
+        </div>
+        <div class="sr-live" aria-live="polite"></div>
+
+        <div id="mb-chart" ${this._view === "table" ? "hidden" : ""}>
+          ${chartHTML}
+        </div>
+
+        <div id="mb-table" ${this._view === "chart" ? "hidden" : ""}>
+          ${tableHTML}
+        </div>
+      </div>
+    `;
+
+    const btn = this.shadowRoot.querySelector(".toggle");
+    const live = this.shadowRoot.querySelector(".sr-live");
+    btn.addEventListener("click", () => {
+      this._view = this._view === "chart" ? "table" : "chart";
+      this.render();
+      live.textContent = this._view === "table" ? "Table view shown" : "Chart view shown";
+    });
   }
+
+  _renderTable(items) {
+    return `
+      <div class="govuk-table-container" role="region" aria-label="Municipal budget table with drill-down categories" tabindex="0">
+        <table class="govuk-table">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header">Category</th>
+             
+              <th scope="col" class="govuk-table__header govuk-table__header--numeric">Amount</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            ${items.map(it => {
+             const hasBreakdown = Array.isArray(it.breakdown) && it.breakdown.length;
+              const totalAmt = hasBreakdown
+                ? it.breakdown.reduce((s, b) => s + (Number(b.amount) || 0), 0)
+                : null;
+
+              const parentRow = `
+                <tr class="govuk-table__row" style="font-weight:bold;background-color:#f5f5f6">
+                  <th scope="row" class="govuk-table__header" style="font-weight:bold;background-color:#f5f5f6">${it.label}</th>
+              
+                  <td class="govuk-table__cell govuk-table__cell--numeric" data-title="Amount">
+                    ${totalAmt != null ? this.formatMoney(totalAmt) : ""}
+                  </td>
+                </tr>
+              `;
+
+              const breakdownRows = Array.isArray(it.breakdown) && it.breakdown.length
+                ? it.breakdown.map(b => `
+                    <tr class="govuk-table__row">
+                      <th scope="row" class="govuk-table__header" style="font-weight:400;">
+                        <span aria-hidden="true"></span><span class="visually-hidden"> </span>${b.label}
+                      </th>
+                      
+                      <td class="govuk-table__cell govuk-table__cell--numeric" data-title="Amount">${this.formatMoney(b.amount)}</td>
+                    </tr>
+                  `).join("")
+                : "";
+
+              return parentRow + breakdownRows;
+            }).join("")}
+          </tbody>
+        </table>
+      </div>
+    `;
+  }
+
 }
+
+if (!customElements.get("municipal-budget")) {
+  customElements.define("municipal-budget", MunicipalBudget);
+}
+
 const STYLES = `
   <style>
     :host { display:block;  font-family: Arial, Helvetica, sans-serif; }
+    p,span{font-family: Arial, Helvetica, sans-serif;}
     .tax-chart {
-      --header:#1f2f43; --field:#5c874c; --bar:#0095cc; --text:black;
+      --header:#1f2f43; --field:#5c874c; --bar:#12436d; --text:black;
       --radius:0; --row-h:27px; --grid-lines:rgba(255,255,255,.2); --border:#dbdcdd;
       font-family: Inter, system-ui, sans-serif;
       margin: 8px 0 16px; color: var(--text);
@@ -135,7 +214,7 @@ const STYLES = `
     .kpi-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin:12px 0 24px; padding:0; list-style:none; }
     .kpi-grid > li { background:#f5f5f6; padding:2rem; border:1px solid var(--border); }
     .kpi-grid span { display:block; } .kpi-grid strong { display:block; font-size:2.5rem; font-weight:800; }
-    .bar-text { line-height:1.25; margin:0 0 8px 0; }
+    .bar-text { line-height:1.25; margin:0 0 8px 0;font-size:19px; }
 
     .tax-chart__plot {
       position:relative;
@@ -181,7 +260,7 @@ const STYLES = `
     /* Breakdown panel opens below the bar */
     .breakdown-panel { margin-top:8px; }
     .breakdown__list { list-style:none; margin:15px 0 0; padding:0; display:grid; gap:6px; }
-    .breakdown__list li { display:flex; justify-content:space-between; border-bottom:1px dashed var(--border); padding:4px 0; }
+    .breakdown__list li { display:flex; justify-content:space-between; border-bottom:1px var(--border); padding:4px 0; }
     .breakdown__list li:last-child { border-bottom:0; }
 
     @media (max-width:520px){
@@ -204,6 +283,97 @@ const STYLES = `
     @media (prefers-reduced-motion: reduce) {
       .toggle-details .chev { transition: none; }
     }
+      /* --- GOV.UK-like table styling (scoped to Shadow DOM) --- */
+.govuk-table-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+
+}
+.govuk-table-container:focus {
+  
+  outline-offset: 0;
+}
+
+.govuk-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  font-family:  Arial, Helvetica, sans-serif;
+  font-size: 19px;
+  line-height: 1.25;
+}
+.govuk-table__caption {
+  text-align: left;
+  padding: 10px 15px;
+  
+  margin: 0;
+}
+.govuk-table__caption--m { font-size: 19px; line-height: 1.31579; }
+
+.govuk-table__head .govuk-table__header {
+
+  border-bottom: 2px solid #0b0c0c;
+}
+.govuk-table__row > .govuk-table__header,
+.govuk-table__row > .govuk-table__cell {
+  padding: 10px 0px;
+  vertical-align: top;
+  text-align: left;
+  
+
+  border-bottom: 1px solid #b1b4b6;
+}
+
+.govuk-table__cell td{
+  font-weight:400;
+}
+.govuk-table__header--numeric,
+.govuk-table__cell--numeric {
+  text-align: right;
+}
+.govuk-table__foot .govuk-table__header,
+.govuk-table__foot .govuk-table__cell {
+  border-top: 2px solid #0b0c0c;
+ 
+}.toggle {
+  font: Arial, sans-serif;
+  padding: .5rem .75rem;
+  
+  max-width:max-content;
+  cursor: pointer;
+}
+.toggle:focus-visible { outline: 3px solid #1f77b4; outline-offset: 2px; }
+.toggle {
+  font-family:  arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.1875;
+  box-sizing: border-box;
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  margin-top: 0;
+  margin-right: 0;
+  margin-left: 0;
+  margin-bottom: 22px;
+  padding: 8px 10px 7px;
+  border: 2px solid transparent;
+  border-radius: 0;
+  color: #ffffff;
+  background-color: #00703c;
+  box-shadow: 0 2px 0 var(--button-shadow);
+  text-align: center;
+  vertical-align: top;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+.toggle:hover {
+  background-color: #005a30;
+  /* background-color: #005a30; */
+}
     </style>
 `;
 if (!customElements.get("municipal-budget")) {
