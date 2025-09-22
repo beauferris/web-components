@@ -122,7 +122,7 @@ class MunicipalBudget extends HTMLElement {
 }
 const STYLES = `
   <style>
-    :host { display:block; }
+    :host { display:block;  font-family: Arial, Helvetica, sans-serif; }
     .tax-chart {
       --header:#1f2f43; --field:#5c874c; --bar:#0095cc; --text:black;
       --radius:0; --row-h:27px; --grid-lines:rgba(255,255,255,.2); --border:#dbdcdd;
