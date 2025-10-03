@@ -260,7 +260,7 @@ const STYLES = `
     /* Breakdown panel opens below the bar */
     .breakdown-panel { margin-top:8px; }
     .breakdown__list { list-style:none; margin:15px 0 0; padding:0; display:grid; gap:6px; }
-    .breakdown__list li { display:flex; justify-content:space-between; border-bottom:1px var(--border); padding:4px 0; }
+    .breakdown__list li { display:flex; justify-content:space-between; border-bottom:1px solid var(--border); padding:10px 0;font-size: 19px; }
     .breakdown__list li:last-child { border-bottom:0; }
 
     @media (max-width:520px){

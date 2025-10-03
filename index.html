@@ -5,7 +5,22 @@
     <title>title</title>
   </head>
   <body style="max-width: 960px">
-    <h2>Budget Breakdown</h2>
+    <county-connection-signup
+  action="https://rockyview.us19.list-manage.com/subscribe/post?u=a0ed60aaeefc5a483e08b2ca7&id=4c8fc1eefa&f_id=008237e7f0"
+  icon-src="https://raw.githubusercontent.com/beauferris/web-components/refs/heads/main/county-connection.png"
+  icon-alt=""
+  heading="County Connection"
+  description="Sign-up to receive newsfeed posts direct to your inbox."
+  placeholder="Enter your email address"
+  button-text="Subscribe"
+  button-color="var(--secondary-color)"
+  text-color="#ffffff"
+  bg-color="transparent"
+  honeypot-name="b_a0ed60aaeefc5a483e08b2ca7_4c8fc1eefa"
+  target="_self">
+</county-connection-signup>
+    
+    <h2 style="font-family: Arial, Helvetica, sans-serif;">Budget Breakdown</h2>
     <municipal-kpis
       heading="2025 Budget KPIs"
       data-src="budget-2025.json"
@@ -16,14 +31,16 @@
       max="45"
       data-src="/budget-2025.json"
     ></municipal-budget>
-    <h2>Revenue Breakdown</h2>
+    <h2 style="font-family: Arial, Helvetica, sans-serif;">Revenue Breakdown</h2>
+    
     <revenue-pie
       title="2025 Operating Revenues"
       data-src="/revenue-2025.json"
     ></revenue-pie>
-    <h2>Tax Comparison Tool</h2>
+    <h2 style="font-family: Arial, Helvetica, sans-serif;">Tax Comparison Tool</h2>
     <property-tax-calculator></property-tax-calculator>
   </body>
+  <script type="module" src="/mailchimp.js"></script>
   <script type="module" src="/kpi.js"></script>
   <script type="module" src="/revenue-pie.js"></script>
   <script type="module" src="budget-breakdown.js"></script>
