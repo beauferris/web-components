@@ -239,6 +239,7 @@ const STYLES = `
       border:none;
       padding:.5rem .75rem; border-radius:6px; cursor:pointer;
       font: 500 0.9rem/1.2 Inter, system-ui, sans-serif;
+      font-size:16px;
     }
     .toggle-details:hover { background:#f0f0f2; }
     .toggle-details:focus { outline: 2px solid #005fcc; outline-offset: 2px; }
