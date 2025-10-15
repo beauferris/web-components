@@ -117,7 +117,7 @@ class MunicipalBudget extends HTMLElement {
       ${STYLES}
       <div class="host">
         <div>
-          <button class="toggle" type="button"
+          <button style="font-size:18px" class="toggle" type="button"
                   aria-pressed="${this._view === "table"}"
                   aria-controls="mb-chart mb-table">
             ${this._view === "table" ? "Show chart" : "Show table"}
